@@ -19,9 +19,9 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   }
 });
 //sequelize-auto -h localhost -d btppzsmy_test_application -u root -p --dialect -o app/models
-const db = {};
-//const initModels = require("./init-models.js");
-//const db=initModels(sequelize);
+//const db = {};
+const initModels = require("./init-models.js");
+const db=initModels(sequelize);
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 module.exports = db;
