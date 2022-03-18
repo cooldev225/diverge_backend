@@ -5,6 +5,15 @@ const multer = require("multer");
 const upload = multer();
 
 const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+var options = {
+  explorer: true,
+  //customCss: '.swagger-ui .topbar { display: none }'
+  //customCssUrl: '/custom.css'
+  //customJs: '/custom.js'
+};
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,options));
 
 var corsOptions = {
   origin: "*"
@@ -34,6 +43,9 @@ const db = require("./app/models");
 // });
 
 // simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Diverge backend." });
+});
 app.get("/api/test", (req, res) => {
   res.json({ message: "Welcome to Diverge backend." });
 });
@@ -44,3 +56,5 @@ const PORT = process.env.PORT || 2083;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+
