@@ -2,22 +2,152 @@
     "swagger": "2.0",
     "info": {
       "version": "1.0.0", 
-      "title": "My User Project CRUD",
-      "description": "My User Project Application API",
+      "title": "Diverge App",
+      "description": "This offer restAPI for Diverge App using nodeJs language on backoffice of Diverge. ",
       "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
+        "name": "Frontend: diverge.live",
+        "url": "https://diverge.live/"
       }
     },
-    "host": "localhost:8000",
-    "basePath": "/",
+    "host": "localhost:82",
+    "basePath": "/api/",
     "tags": [
       {
-        "name": "Users",
-        "description": "API for users in the system"
+        "name": "Auth",
+        "description": "API for authentication in the system"
+      },{
+        "name": "Market",
+        "description": "API for market in the system"
       }
     ],
-    "schemes": ["http"],
+    "schemes": ["http","https"],
     "consumes": ["application/json"],
-    "produces": ["application/json"]
+    "produces": ["application/json"],
+    "paths": {
+      "/users/login": {
+        "post": {
+          "tags": ["Auth"],
+          "summary": "Get all users in system",
+          "parameters":[
+            {
+              "name":"username",
+              "description":"User name",
+              "schema":{
+                "type":"string",
+                "required":true
+              }
+            },
+            {
+              "name":"password",
+              "description":"User password",
+              "schema":{
+                "type":"string",
+                "required":true
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        }
+      },
+      "/markets/getMarkets": {
+        "get": {
+          "tags": ["Market"],
+          "summary": "Get all users in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Market"],
+          "summary": "Get all users in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        }
+      },
+      "/markets/getMarketBySymbol": {
+        "get": {
+          "tags": ["Market"],
+          "summary": "Get all users in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Market"],
+          "summary": "Get all users in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": ["name", "_id", "companies"],
+        "properties": {
+          "_id": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "books": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "companies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "$ref": "#/definitions/User"
+      }
+    }
   }

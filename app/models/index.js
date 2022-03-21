@@ -5,9 +5,9 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   port:3306,
   dialect: dbConfig.dialect,
   dialectOptions: {
-    socketPath: '/var/run/mysqld/mysqld.sock',
-    //useUTC: true,
-    //dateFirst: 1
+    //socketPath: '/var/run/mysqld/mysqld.sock',
+            //useUTC: true,
+            //dateFirst: 1
   },
   //operatorsAliases: false,
   logging: true,
