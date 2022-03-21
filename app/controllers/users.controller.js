@@ -3,6 +3,9 @@ exports.login = async (req, res) => {
   let password=req.body.password;
   let body={error:false,status:true,message:'success!'};
 };
+exports.getBestCustomers = async (req, res) => {
+  let body={error:false,status:true,message:'success!'};
+};
 exports.changePassword = async (req, res) => {
   let oldpass=req.body.old_pass;
   let newpass=req.body.new_pass;
