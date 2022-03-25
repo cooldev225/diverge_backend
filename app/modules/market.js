@@ -59,7 +59,16 @@ exports.getMarkets = async ()=>{
     data:res
   }
 };
-
+exports.getTokens = async ()=>{
+  let res = [];
+  let sql = "select * from tokens";
+  let results = await db.sequelize.query(sql,{type: QueryTypes.SELECT});
+  return {
+    error:false,
+    status:true,
+    data:results
+  }
+};
 exports.getMarketBySymbol = async (symbol='')=>{
   let sql = `select * from tokens where symbol='${symbol}'`;
   let results = await db.sequelize.query(sql,{type: QueryTypes.SELECT});

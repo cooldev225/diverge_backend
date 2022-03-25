@@ -27,7 +27,7 @@
       "/users/login": {
         "post": {
           "tags": ["Auth"],
-          "summary": "Get all users in system",
+          "summary": "Login and get token string",
           "parameters":[
             {
               "name":"username",
@@ -35,22 +35,24 @@
               "schema":{
                 "type":"string",
                 "required":true
-              }
+              },
+              "required":true
             },
             {
               "name":"password",
               "description":"User password",
               "schema":{
-                "type":"string",
+                "type":"password",
                 "required":true
-              }
+              },
+              "required":true
             }
           ],
           "responses": {
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/Users"
+                "$ref": "#/definitions/VerifyResponse"
               }
             }
           }
@@ -59,24 +61,24 @@
       "/markets/getMarkets": {
         "get": {
           "tags": ["Market"],
-          "summary": "Get all users in system",
+          "summary": "Get market data for all tokens",
           "responses": {
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/Users"
+                "$ref": "#/definitions/MarketData"
               }
             }
           }
         },
         "post": {
           "tags": ["Market"],
-          "summary": "Get all users in system",
+          "summary": "Get market data for all tokens",
           "responses": {
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/Users"
+                "$ref": "#/definitions/MarketData"
               }
             }
           }
@@ -85,24 +87,44 @@
       "/markets/getMarketBySymbol": {
         "get": {
           "tags": ["Market"],
-          "summary": "Get all users in system",
+          "summary": "Get market data for given token",
+          "parameters":[
+            {
+              "name":"symbol",
+              "description":"token's symbol",
+              "schema":{
+                "type":"string"
+              },
+              "required":true
+            }
+          ],
           "responses": {
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/Users"
+                "$ref": "#/definitions/MarketData"
               }
             }
           }
         },
         "post": {
           "tags": ["Market"],
-          "summary": "Get all users in system",
+          "summary": "Get market data for given token",
+          "parameters":[
+            {
+              "name":"symbol",
+              "description":"token's symbol",
+              "schema":{
+                "type":"string"
+              },
+              "required":true
+            }
+          ],
           "responses": {
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/Users"
+                "$ref": "#/definitions/MarketData"
               }
             }
           }
@@ -110,44 +132,48 @@
       }
     },
     "definitions": {
-      "User": {
-        "required": ["name", "_id", "companies"],
+      "VerifyResponse": {
+        "required": ["status", "error", "token"],
         "properties": {
-          "_id": {
-            "type": "integer",
-            "uniqueItems": true
+          "status": {
+            "type": "boolean"
           },
-          "isPublic": {
+          "error": {
+            "type": "boolean"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "MarketData":{
+        "required": ["id","symbol","name","logo"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "symbol": {
             "type": "boolean"
           },
           "name": {
             "type": "string"
           },
-          "books": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "amount": {
-                  "type": "number"
-                }
-              }
-            }
+          "logo": {
+            "type": "string"
           },
-          "companies": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "slug": {
+            "type": "string"
+          },
+          "contract_addresses": {
+            "type": "string"
+          },
+          "marketdata": {
+            "type": "string"
+          },
+          "marketcap": {
+            "type": "string"
           }
         }
-      },
-      "Users": {
-        "type": "array",
-        "$ref": "#/definitions/User"
       }
     }
   }

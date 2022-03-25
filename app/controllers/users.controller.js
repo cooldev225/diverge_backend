@@ -1,10 +1,13 @@
+const user_model = require('../modules/user.js');
 exports.login = async (req, res) => {
   let username=req.body.username;
   let password=req.body.password;
   let body={error:false,status:true,message:'success!'};
+  res.status(200).send(body);
 };
 exports.getBestCustomers = async (req, res) => {
-  let body={error:false,status:true,message:'success!'};
+  let body=await user_model.getBestCustomers();
+  res.status(200).send(body);
 };
 exports.changePassword = async (req, res) => {
   let oldpass=req.body.old_pass;
